@@ -25,7 +25,12 @@ class EventManager {
 	trigger(event, ...args) {
 		this.adjust(event);
 		for(let fn of this.list[event]) {
-			fn.apply(null, args);
+			try {
+				fn.apply(null, args);
+			} catch(error) {
+				console.log("event error: " + event + " <----------");
+				console.error(error);
+			}
 		}
 	}
 }
