@@ -1,8 +1,10 @@
 export default class EventManager {
   private list: Record<string, Array<(...args: unknown[]) => void>>;
+  logger: (...data: unknown[]) => void;
 
-  constructor() {
+  constructor(logger?: (...data: unknown[]) => void) {
     this.list = {};
+    this.logger = logger ?? console.error;
   }
 
   private adjust(event: string) {
@@ -15,6 +17,10 @@ export default class EventManager {
     if (!this.list[event].length) {
       delete this.list[event];
     }
+  }
+
+  getListeners(event: string) {
+    return this.list[event];
   }
 
   on(event: string, fn: () => void) {
@@ -36,8 +42,7 @@ export default class EventManager {
       try {
         fn(...args);
       } catch (error) {
-        console.log("event error: " + event + " <----------");
-        console.error(error);
+        this.logger(error);
       }
     }
   }
