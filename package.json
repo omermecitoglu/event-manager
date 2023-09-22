@@ -4,6 +4,7 @@
   "description": "provides a simple Event Manager class",
   "main": "dist/index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
     "build": "tsc src/index.ts"
@@ -21,6 +22,9 @@
     "url": "https://github.com/omermecitoglu/event-manager/issues"
   },
   "homepage": "https://github.com/omermecitoglu/event-manager#readme",
+  "publishConfig": {
+    "@viegnar:registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "eslint": "^8.16.0",
