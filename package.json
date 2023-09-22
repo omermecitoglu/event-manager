@@ -1,6 +1,6 @@
 {
   "name": "@viegnar/event-manager",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "provides a simple Event Manager class",
   "main": "dist/index.js",
   "scripts": {
