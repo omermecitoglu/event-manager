@@ -1,5 +1,5 @@
 {
-  "name": "@viegnar/event-manager",
+  "name": "@omermecitoglu/event-manager",
   "version": "2.0.2",
   "description": "provides a simple Event Manager class",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/omermecitoglu/event-manager#readme",
   "publishConfig": {
-    "@viegnar:registry": "https://npm.pkg.github.com"
+    "@omermecitoglu:registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "@types/chai": "^4.3.6",
