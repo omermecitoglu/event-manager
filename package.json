@@ -1,6 +1,6 @@
 {
   "name": "@omermecitoglu/event-manager",
-  "version": "2.0.2",
+  "version": "2.0.2.1",
   "description": "provides a simple Event Manager class",
   "main": "dist/index.js",
   "scripts": {
