@@ -1,9 +1,13 @@
+type EventListener = (...args: unknown[]) => void;
 export default class EventManager {
     private list;
-    constructor();
+    private logger;
+    constructor(logger?: (...data: unknown[]) => void);
     private adjust;
     private cleanUp;
-    on(event: string, fn: () => void): void;
-    off(event: string, fn: () => void): void;
-    trigger(event: string, ...args: unknown[]): void;
+    on(eventName: string, listener: EventListener): void;
+    off(eventName: string, listener: EventListener): void;
+    trigger(eventName: string, ...args: unknown[]): void;
+    destroy(): void;
 }
+export {};
