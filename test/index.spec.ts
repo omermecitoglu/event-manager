@@ -57,7 +57,7 @@ describe("EventManager", () => {
     eventManager.on(event, listener1);
     eventManager.on(event, listener2);
 
-    const consoleErrorSpy = sinon.spy(eventManager, "logger");
+    const consoleErrorSpy = sinon.spy(eventManager, "logger" as keyof EventManager);
 
     eventManager.trigger(event);
 
@@ -77,6 +77,23 @@ describe("EventManager", () => {
     expect(eventManager.getListeners(event)).to.exist;
 
     eventManager.off(event, listener);
+    expect(eventManager.getListeners(event)).to.not.exist;
+  });
+
+  it("should remove all the event listeners with destroy()", () => {
+    const event = "testEvent";
+    const listener1 = () => {
+      // do nothing.
+    };
+    const listener2 = () => {
+      // do nothing.
+    };
+
+    eventManager.on(event, listener1);
+    eventManager.on(event, listener2);
+
+    eventManager.destroy();
+
     expect(eventManager.getListeners(event)).to.not.exist;
   });
 });

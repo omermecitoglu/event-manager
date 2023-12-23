@@ -49,4 +49,13 @@ export default class EventManager {
       }
     }
   }
+
+  destroy() {
+    for (const eventName of Object.keys(this.list)) {
+      const listeners = this.list[eventName].slice();
+      for (const listener of listeners) {
+        this.off(eventName, listener);
+      }
+    }
+  }
 }
