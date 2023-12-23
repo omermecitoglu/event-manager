@@ -1,44 +1,47 @@
+type EventListener = (...args: unknown[]) => void;
+
 export default class EventManager {
-  private list: Record<string, Array<(...args: unknown[]) => void>>;
-  logger: (...data: unknown[]) => void;
+  private list: Record<string, EventListener[]>;
+  private logger: (...data: unknown[]) => void;
 
   constructor(logger?: (...data: unknown[]) => void) {
     this.list = {};
+    // eslint-disable-next-line no-console
     this.logger = logger ?? console.error;
   }
 
-  private adjust(event: string) {
-    if (!this.list[event]) {
-      this.list[event] = [];
+  private adjust(eventName: string) {
+    if (!this.list[eventName]) {
+      this.list[eventName] = [];
     }
   }
 
-  private cleanUp(event: string) {
-    if (!this.list[event].length) {
-      delete this.list[event];
+  private cleanUp(eventName: string) {
+    if (!this.list[eventName].length) {
+      delete this.list[eventName];
     }
   }
 
-  getListeners(event: string) {
-    return this.list[event];
+  getListeners(eventName: string) {
+    return this.list[eventName];
   }
 
-  on(event: string, fn: () => void) {
-    this.adjust(event);
-    const idx = this.list[event].indexOf(fn);
-    if (idx < 0) this.list[event].push(fn);
+  on(eventName: string, listener: EventListener) {
+    this.adjust(eventName);
+    const idx = this.list[eventName].indexOf(listener);
+    if (idx < 0) this.list[eventName].push(listener);
   }
 
-  off(event: string, fn: () => void) {
-    this.adjust(event);
-    const idx = this.list[event].indexOf(fn);
-    if (idx > -1) this.list[event].splice(idx, 1);
-    this.cleanUp(event);
+  off(eventName: string, listener: EventListener) {
+    this.adjust(eventName);
+    const idx = this.list[eventName].indexOf(listener);
+    if (idx > -1) this.list[eventName].splice(idx, 1);
+    this.cleanUp(eventName);
   }
 
-  trigger(event: string, ...args: unknown[]) {
-    this.adjust(event);
-    for (const fn of this.list[event]) {
+  trigger(eventName: string, ...args: unknown[]) {
+    this.adjust(eventName);
+    for (const fn of this.list[eventName]) {
       try {
         fn(...args);
       } catch (error) {
