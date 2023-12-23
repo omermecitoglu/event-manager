@@ -1,13 +1,13 @@
 {
-  "name": "@omermecitoglu/event-manager",
-  "version": "2.0.3",
+  "name": "@omer-x/event-manager",
+  "version": "2.1.0",
   "description": "provides a simple Event Manager class",
   "main": "dist/index.js",
   "scripts": {
     "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts",
     "lint": "eslint ./src --ext .ts",
     "lint:fix": "eslint ./src --ext .ts --fix",
-    "build": "tsc src/index.ts"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,19 +22,17 @@
     "url": "https://github.com/omermecitoglu/event-manager/issues"
   },
   "homepage": "https://github.com/omermecitoglu/event-manager#readme",
-  "publishConfig": {
-    "@omermecitoglu:registry": "https://npm.pkg.github.com"
-  },
   "devDependencies": {
-    "@types/chai": "^4.3.6",
-    "@types/node": "^20.6.3",
-    "@types/sinon": "^10.0.16",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "chai": "^4.3.8",
-    "eslint": "^8.16.0",
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.5",
+    "@types/sinon": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "chai": "^4.3.10",
+    "eslint": "^8.56.0",
     "mocha": "^10.2.0",
-    "sinon": "^16.0.0",
+    "sinon": "^17.0.1",
     "ts-mocha": "^10.0.0",
-    "typescript": "^4.7.2"
+    "typescript": "^5.3.3"
   }
 }
