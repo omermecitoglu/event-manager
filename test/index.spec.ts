@@ -15,7 +15,7 @@ describe("EventManager", () => {
       // do nothing.
     };
     eventManager.on(event, listener);
-    expect(eventManager.getListeners(event)).to.include(listener);
+    expect(eventManager["list"][event]).to.include(listener);
   });
 
   it("should remove an event listener with off()", () => {
@@ -25,7 +25,7 @@ describe("EventManager", () => {
     };
     eventManager.on(event, listener);
     eventManager.off(event, listener);
-    expect(eventManager.getListeners(event)).to.not.include(listener);
+    expect(eventManager["list"][event]).to.not.include(listener);
   });
 
   it("should trigger event listeners with trigger()", () => {
@@ -74,10 +74,10 @@ describe("EventManager", () => {
     };
 
     eventManager.on(event, listener);
-    expect(eventManager.getListeners(event)).to.exist;
+    expect(eventManager["list"][event]).to.exist;
 
     eventManager.off(event, listener);
-    expect(eventManager.getListeners(event)).to.not.exist;
+    expect(eventManager["list"][event]).to.not.exist;
   });
 
   it("should remove all the event listeners with destroy()", () => {
@@ -94,6 +94,6 @@ describe("EventManager", () => {
 
     eventManager.destroy();
 
-    expect(eventManager.getListeners(event)).to.not.exist;
+    expect(eventManager["list"][event]).to.not.exist;
   });
 });

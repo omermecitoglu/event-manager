@@ -22,10 +22,6 @@ export default class EventManager {
     }
   }
 
-  getListeners(eventName: string) {
-    return this.list[eventName];
-  }
-
   on(eventName: string, listener: EventListener) {
     this.adjust(eventName);
     const idx = this.list[eventName].indexOf(listener);
