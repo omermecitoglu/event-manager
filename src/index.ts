@@ -1,4 +1,4 @@
-type EventListener = (...args: unknown[]) => void;
+type EventListener<T = unknown> = (...args: T[]) => void;
 
 export default class EventManager {
   private list: Record<string, EventListener[]>;
@@ -22,20 +22,20 @@ export default class EventManager {
     }
   }
 
-  on(eventName: string, listener: EventListener) {
+  on<T>(eventName: string, listener: EventListener<T>) {
     this.adjust(eventName);
     const idx = this.list[eventName].indexOf(listener);
     if (idx < 0) this.list[eventName].push(listener);
   }
 
-  off(eventName: string, listener: EventListener) {
+  off<T>(eventName: string, listener: EventListener<T>) {
     this.adjust(eventName);
     const idx = this.list[eventName].indexOf(listener);
     if (idx > -1) this.list[eventName].splice(idx, 1);
     this.cleanUp(eventName);
   }
 
-  trigger(eventName: string, ...args: unknown[]) {
+  trigger<T>(eventName: string, ...args: T[]) {
     this.adjust(eventName);
     for (const fn of this.list[eventName]) {
       try {
