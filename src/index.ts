@@ -1,7 +1,7 @@
-type EventListener<T = unknown> = (...args: T[]) => void;
+type EventListener<T extends unknown[]> = (...args: T) => void;
 
 export default class EventManager {
-  private list: Record<string, EventListener[]>;
+  private list: Record<string, EventListener<unknown[]>[]>;
   private logger: (...data: unknown[]) => void;
 
   constructor(logger?: (...data: unknown[]) => void) {
@@ -22,13 +22,13 @@ export default class EventManager {
     }
   }
 
-  on<T>(eventName: string, listener: EventListener<T>) {
+  on<T extends unknown[]>(eventName: string, listener: EventListener<T>) {
     this.adjust(eventName);
     const idx = this.list[eventName].indexOf(listener);
     if (idx < 0) this.list[eventName].push(listener);
   }
 
-  off<T>(eventName: string, listener: EventListener<T>) {
+  off<T extends unknown[]>(eventName: string, listener: EventListener<T>) {
     this.adjust(eventName);
     const idx = this.list[eventName].indexOf(listener);
     if (idx > -1) this.list[eventName].splice(idx, 1);
